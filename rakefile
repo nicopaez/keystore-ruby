@@ -1,0 +1,7 @@
+require "cucumber/rake/task"
+require './application.rb'
+require 'sinatra/activerecord/rake'
+
+Cucumber::Rake::Task.new(:cucumber) do |task|
+  task.cucumber_opts = ["features"]
+end

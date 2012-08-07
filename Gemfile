@@ -20,4 +20,6 @@ group :development do
   gem 'cucumber', '1.1.9'
   gem 'capybara'
   gem 'rspec'
+  gem 'therubyracer'
+  gem "jshintrb"
 end

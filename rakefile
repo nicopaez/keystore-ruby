@@ -1,9 +1,22 @@
 require './application.rb'
 require 'sinatra/activerecord/rake'
 
-if ENV['RACK_ENV'] == 'development' 
+if ENV['RACK_ENV'].nil? 
+
   require 'cucumber/rake/task'
+  require "jshintrb/jshinttask"
+
   Cucumber::Rake::Task.new(:cucumber) do |task|
     task.cucumber_opts = ["features"]
   end
+
+
+  Jshintrb::JshintTask.new(:jshint) do |t|
+    t.pattern = 'public/js/application.js'
+    t.options = {:strict => false}
+  end
+
+  task :check_quality => [:cucumber, :jshint]
 end
+
+

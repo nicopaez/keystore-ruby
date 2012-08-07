@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('#searchButton').click(search);
     $('#newButton').click(showNewForm);
     $('#saveButton').click(saveChanges);
-})
+});
 
 function search(){
     var key = $('#searchBox').val();

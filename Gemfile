@@ -5,13 +5,13 @@ gem "rack"
 gem "rake"
 gem 'sinatra-activerecord'
 gem 'activerecord'
-gem 'sqlite3'
 gem 'json'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'pg', '0.10.0'
 
 group :development do
+  gem 'sqlite3'
   gem "rspec_junit_formatter"
   gem 'simplecov'
   gem 'cucumber-sinatra'

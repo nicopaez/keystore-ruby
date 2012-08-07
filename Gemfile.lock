@@ -120,7 +120,7 @@ DEPENDENCIES
   json
   omniauth
   omniauth-twitter
-  pg (= 0.10.0)
+  pg
   rack
   rake
   rspec

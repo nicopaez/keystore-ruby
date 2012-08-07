@@ -9,6 +9,8 @@ GEM
       activesupport (= 3.2.7)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-postgresql-adapter (0.0.1)
+      pg
     activesupport (3.2.7)
       i18n (~> 0.6)
       multi_json (~> 1.0)
@@ -111,6 +113,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  activerecord-postgresql-adapter
   capybara
   cucumber (= 1.1.9)
   cucumber-sinatra

@@ -4,6 +4,7 @@ gem "unicorn"
 gem "rack"
 gem "rake"
 gem 'sinatra-activerecord'
+gem 'activerecord-postgresql-adapter'
 gem 'activerecord'
 gem 'json'
 gem 'omniauth'

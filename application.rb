@@ -8,9 +8,16 @@ require 'omniauth-twitter'
 class MyApplication < Sinatra::Base
 
   register Sinatra::ActiveRecordExtension
+  enable :sessions
+
+  configure :production,:staging do
+    set :database, ENV['DATABASE_URL']
+    use OmniAuth::Builder do
+      provider :developer
+    end
+  end
 
   configure :development do
-    enable :sessions
     set :database, 'sqlite:///notes-dev.db'
     use OmniAuth::Builder do
       provider :developer
@@ -19,6 +26,9 @@ class MyApplication < Sinatra::Base
 
   configure :test do
     set :database, 'sqlite:///notes-test.db'
+    use OmniAuth::Builder do
+      provider :developer
+    end
   end
 
   before do
@@ -29,6 +39,7 @@ class MyApplication < Sinatra::Base
 
   post '/auth/developer/callback' do
     session[:uid] = request.env['omniauth.auth']["uid"]
+    puts "session: #{session[:uid]}"
     redirect '/'
   end
 

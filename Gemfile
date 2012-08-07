@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'json'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'pg', '0.10.0'
 
 group :development do
   gem "rspec_junit_formatter"

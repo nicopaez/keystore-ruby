@@ -1,7 +1,7 @@
 require './application.rb'
 require 'sinatra/activerecord/rake'
 
-if RACK_ENV == 'development' 
+if ENV['RACK_ENV'] == 'development' 
   require 'cucumber/rake/task'
   Cucumber::Rake::Task.new(:cucumber) do |task|
     task.cucumber_opts = ["features"]

@@ -1,15 +1,20 @@
 KeyStory (ruby)
 ==================
+[![Build Status](https://secure.travis-ci.org/nicopaez/keystore-ruby.png?branch=master)](http://travis-ci.org/nicopaez/keystore-ruby)
 
-It is just a sample application to show the use of some technologies.
-The current version uses the following technologies/tools:
+This is just a sample application to show the use of some technologies, tools and practices.
+The current version uses:
 
-* Sinatra Web Framework
+* Sinatra
 * Bootstrap
 * Cucumber
-* rspec
+* RSpec
 * Rake
 * Active Record
 * jQuery
+* SimpleCov
+* Travis CI
+* Heroku
+* JSHint
 
 

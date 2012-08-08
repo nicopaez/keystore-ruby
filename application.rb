@@ -10,6 +10,7 @@ class MyApplication < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   enable :sessions
 
+  #:nocov:
   configure :production,:staging do
     set :database, ENV['DATABASE_URL']
     use OmniAuth::Builder do
@@ -23,6 +24,7 @@ class MyApplication < Sinatra::Base
       provider :developer
     end
   end
+  #:nocov:
 
   configure :test do
     set :database, 'sqlite:///notes-test.db'
@@ -60,11 +62,18 @@ class MyApplication < Sinatra::Base
   end
 
   post '/new' do
-    note = Note.new
-    note.key = params[:key]
-    note.value = params[:value]
-    note.user = 'nico'
-    note.save
+    key = params[:key]
+    note = Note.find_by_key(key)
+    if(note.nil?)
+      note = Note.new
+      note.key = key
+      note.value = params[:value]
+      note.user = 'nico'
+      note.save
+      return 'success'
+    else
+      return 'Duplicated key'
+    end
   end
 
   post '/:id' do

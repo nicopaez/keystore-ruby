@@ -36,7 +36,11 @@ function saveChanges(){
         type:"POST",
         data:{key:key, value:value},
         success:function (data) {
-            showMessage('success', 'Changes successfully saved');
+            if(data=='success') {
+                showMessage('success', 'Changes successfully saved');
+            }else {
+                showMessage('error', data);
+            }
         },
         error:function (msg) {
             showMessage('error', 'An error occur during the operation');

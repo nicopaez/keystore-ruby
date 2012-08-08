@@ -226,3 +226,11 @@ Then /^I should see "Hello, world!$/ do
   pending # express the regexp above with the code you wish you had
 end
 
+Given /^the note "([^"]*)", "([^"]*)" exists$/ do |arg1, arg2|
+  Note.destroy_all
+  note = Note.new
+  note.key = arg1
+  note.value = arg2
+  note.user = 'nico'
+  note.save
+end

@@ -1,12 +1,14 @@
-require './application.rb'
 require 'sinatra/activerecord/rake'
 
 if ENV['RACK_ENV'].nil? 
+  ENV['RACK_ENV'] = 'test'
 
+  require './application.rb'
   require 'cucumber/rake/task'
   require "jshintrb/jshinttask"
-
+  
   Cucumber::Rake::Task.new(:cucumber) do |task|
+    Rake::Task['db:migrate'].invoke
     task.cucumber_opts = ["features"]
   end
 

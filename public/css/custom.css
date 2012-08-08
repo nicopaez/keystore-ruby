@@ -19,3 +19,7 @@ textarea.big-body {
     border: 0px;
 }
 
+#alert-area {
+    min-height: 50px;
+}
+

@@ -36,11 +36,16 @@ function saveChanges(){
         type:"POST",
         data:{key:key, value:value},
         success:function (data) {
-            alert('ok');
+            showMessage('success', 'Changes successfully saved');
         },
         error:function (msg) {
-            alert('An error occur during the operation');
+            showMessage('error', 'An error occur during the operation');
         }
     });
     $('#noteModal').modal('hide');
+}
+
+function showMessage (type, message) {
+    $("#alert-area").append($("<div id='alert-message' class='alert alert-" + type + " fade in' data-alert><a class='close' data-dismiss='alert'>×</a><p> " + message + " </p></div>"));
+    $("#alert-message").delay(2000).fadeOut("slow", function () { $(this).remove(); });
 }

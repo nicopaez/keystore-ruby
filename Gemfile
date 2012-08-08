@@ -11,8 +11,7 @@ gem 'json'
 gem 'omniauth'
 gem 'omniauth-twitter'
 
-
-group :development do
+group :test do
   gem 'sqlite3'
   gem "rspec_junit_formatter"
   gem 'simplecov'

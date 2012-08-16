@@ -6,20 +6,22 @@ require 'omniauth'
 require 'omniauth-twitter'
 
 class MyApplication < Sinatra::Base
-
   register Sinatra::ActiveRecordExtension
   enable :sessions
+
 
   #:nocov:
   configure :production,:staging do
     set :database, ENV['DATABASE_URL']
+    @@provider = 'twitter'
     use OmniAuth::Builder do
-      provider :developer
+      provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
     end
   end
 
   configure :development do
     set :database, 'sqlite:///notes-dev.db'
+    @@provider = 'developer'
     use OmniAuth::Builder do
       provider :developer
     end
@@ -28,20 +30,21 @@ class MyApplication < Sinatra::Base
 
   configure :test do
     set :database, 'sqlite:///notes-test.db'
+    @@provider = 'developer'
     use OmniAuth::Builder do
       provider :developer
     end
   end
 
   before do
-    if request.path_info != '/auth/developer/callback'
-      redirect '/auth/developer' unless session[:uid]
+    if request.path_info != "/auth/#{@@provider}/callback"
+      redirect "/auth/#{@@provider}" unless session[:uid]
     end
   end
 
-  post '/auth/developer/callback' do
+  post '/auth/:provider/callback' do
     session[:uid] = request.env['omniauth.auth']["uid"]
-    puts "session: #{session[:uid]}"
+    session[:user_name] = request.env['omniauth.auth']["info"]["name"]
     redirect '/'
   end
 
@@ -52,7 +55,7 @@ class MyApplication < Sinatra::Base
 
   get '/search' do
     key = params[:key]
-    note = Note.find_by_key(key)
+    note = Note.find_by_key_and_user(key, session[:uid])
     if (note.nil?)
       return status(404)
     else
@@ -63,12 +66,12 @@ class MyApplication < Sinatra::Base
 
   post '/new' do
     key = params[:key]
-    note = Note.find_by_key(key)
+    note = Note.find_by_key_and_user(key, session[:uid])
     if(note.nil?)
       note = Note.new
       note.key = key
       note.value = params[:value]
-      note.user = 'nico'
+      note.user = session[:uid]
       note.save
       return 'success'
     else

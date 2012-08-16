@@ -231,6 +231,6 @@ Given /^the note "([^"]*)", "([^"]*)" exists$/ do |arg1, arg2|
   note = Note.new
   note.key = arg1
   note.value = arg2
-  note.user = 'nico'
+  note.user = 'user@something.com'
   note.save
 end

@@ -14,6 +14,7 @@ class MyApplication < Sinatra::Base
   configure :production,:staging do
     set :database, ENV['DATABASE_URL']
     @@provider = 'twitter'
+    use Rack::Session::Cookie
     use OmniAuth::Builder do
       provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
     end
@@ -34,6 +35,8 @@ class MyApplication < Sinatra::Base
     use OmniAuth::Builder do
       provider :developer
     end
+    #ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Base.logger.level = Logger::ERROR
   end
 
   before do

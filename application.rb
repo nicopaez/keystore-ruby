@@ -50,6 +50,11 @@ class MyApplication < Sinatra::Base
     redirect '/'
   end
 
+  post '/auth/:provider/callback' do
+    session[:uid] = request.env['omniauth.auth']["uid"]
+    session[:user_name] = request.env['omniauth.auth']["info"]["name"]
+    redirect '/'
+  end
 
   get '/' do
     erb :application

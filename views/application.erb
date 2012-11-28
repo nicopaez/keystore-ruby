@@ -104,7 +104,11 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<% if (ENV['RACK_ENV'] == 'production')%>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<% else%>
 <script src="js/jquery.min.js"></script>
+<%end%>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/application.js"></script>
 

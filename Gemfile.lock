@@ -85,7 +85,7 @@ GEM
     rspec_junit_formatter (0.1.1)
       builder
       rspec (~> 2.0)
-    rubyzip (0.9.9)
+    rubyzip (1.3.0)
     selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
